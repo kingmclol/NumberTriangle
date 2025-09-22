@@ -91,8 +91,16 @@ public class NumberTriangle {
      *
      */
     public int retrieve(String path) {
-        // TODO implement this method
-        return -1;
+        NumberTriangle pointer = this;
+
+        for (int i = 0; i < path.length(); i++) {
+            if (path.charAt(i) == 'l') {
+                pointer = pointer.left;
+            } else {
+                pointer = pointer.right;
+            }
+        }
+        return pointer.root;
     }
 
     /**
@@ -125,7 +133,7 @@ public class NumberTriangle {
             if (top == null) {
                 // First line handled seperately; no previous line yet and only one node
                 top = new NumberTriangle(Integer.parseInt(line));
-                currLine = new NumberTriangle[] {top};
+                currLine = new NumberTriangle[] { top };
             } else {
                 // Not first line; array of space-seperated numbers
 
@@ -142,7 +150,7 @@ public class NumberTriangle {
                 // connect previous line nodes to current line nodes
                 for (int i = 0; i < prevLine.length; i++) {
                     prevLine[i].setLeft(currLine[i]);
-                    prevLine[i].setRight(currLine[i+1]); // ok as currLine.length = prevLine.length + 1
+                    prevLine[i].setRight(currLine[i + 1]); // ok as currLine.length = prevLine.length + 1
                 }
 
             }
